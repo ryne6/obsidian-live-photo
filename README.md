@@ -1,94 +1,133 @@
-# Obsidian Sample Plugin
+# Obsidian Live Photo Viewer
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+一个优雅的 Obsidian 插件，用于查看和管理 Live Photos，支持自动提取 OPPO 手机 Live Photo 格式。
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## ✨ 特性
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+- 📸 **Live Photo 支持**: 原生支持在 Obsidian 中查看 Live Photos
+- 🎥 **视频播放**: 图片和视频之间的无缝切换
+- 🤖 **智能提取**: 自动从 OPPO 手机 Live Photo 文件中提取视频
+- 🎨 **优雅设计**: 极简美学与流畅的交互动画
+- 📱 **跨平台**: 支持桌面端和移动端
+- 🔧 **灵活配置**: 支持手动指定图片和视频，或自动提取
 
-## First time developing plugins?
+## 🚀 安装
 
-Quick starting guide for new plugin devs:
+### 从 Obsidian 社区插件市场安装
+1. 打开 Obsidian 设置
+2. 进入社区插件
+3. 搜索 "Live Photo Viewer"
+4. 安装并启用插件
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+### 手动安装
+1. 从 GitHub 下载最新版本
+2. 解压 `main.js`、`styles.css` 和 `manifest.json`
+3. 复制到 `VaultFolder/.obsidian/plugins/obsidian-live-photo/`
+4. 在 Obsidian 设置中启用插件
 
-## Releasing new releases
+## 🎯 使用方法
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
-
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
-
-## Adding your plugin to the community plugin list
-
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
-
-## How to use
-
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
-
-## Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
+### 方式一：手动指定图片和视频
+```markdown
+```live
+image: https://example.com/photo.jpg
+video: https://example.com/video.mp4
+```
 ```
 
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
+### 方式二：自动提取（OPPO 手机 Live Photo）
+```markdown
+```live
+image: https://example.com/livephoto.jpg
+```
 ```
 
-## API Documentation
+插件会自动检测图片文件，如果是 OPPO Live Photo 格式，会自动提取其中的视频(oss中跨域增加app://obsidian.md)。
 
-See https://github.com/obsidianmd/obsidian-api
+## 🎨 设计理念
+
+本插件遵循以下设计原则：
+
+- **优雅的极简主义**: 干净精致的界面，不分散内容注意力
+- **流畅的交互**: 精心制作的微交互和过渡动画
+- **直观的用户体验**: 自然的用户流程，操作轻松无负担
+- **清晰的视觉层级**: 通过微妙的阴影和模块化布局呈现信息结构
+- **和谐的色彩**: 柔和的渐变色彩，与 Obsidian 主题完美融合
+
+## 🛠️ 开发
+
+### 环境要求
+- Node.js (v16 或更高版本)
+- pnpm 或 npm
+
+### 开发设置
+```bash
+# 克隆仓库
+git clone https://github.com/your-username/obsidian-live-photo.git
+cd obsidian-live-photo
+
+# 安装依赖
+pnpm install
+
+# 开发模式
+pnpm run dev
+```
+
+### 构建
+```bash
+pnpm run build
+```
+
+## 📁 项目结构
+
+```
+obsidian-live-photo/
+├── main.ts              # 主插件文件
+├── styles.css           # 样式文件
+├── live.svg            # Live Photo 图标
+├── lib/
+│   ├── livePhoto.ts    # Live Photo 提取逻辑
+│   ├── types.ts        # TypeScript 类型定义
+│   └── utils.ts        # 工具函数
+├── manifest.json       # 插件清单
+└── package.json        # 项目配置
+```
+
+## 🔧 技术特性
+
+- **TypeScript**: 完整的类型支持和错误检查
+- **模块化架构**: 清晰的代码组织和职责分离
+- **错误处理**: 完善的错误捕获和用户友好的错误提示
+- **性能优化**: 高效的文件处理和内存管理
+- **跨平台兼容**: 支持各种操作系统和设备
+
+## 🎭 支持的格式
+
+- **图片格式**: JPEG, PNG, WebP, HEIC, HEIF
+- **视频格式**: MP4, MOV, AVI, MKV, WebM
+- **Live Photo**: OPPO 手机 Live Photo 格式 (.jpg with embedded video)
+
+## 🤝 贡献
+
+欢迎贡献代码！请随时提交 issues 和 pull requests。
+
+### 贡献指南
+1. Fork 本仓库
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开 Pull Request
+
+## 📄 许可证
+
+MIT 许可证 - 查看 LICENSE 文件了解详情。
+
+## 🙏 致谢
+
+- Obsidian 团队提供的优秀插件 API
+- 社区的反馈和建议
+- 所有贡献者的支持
+
+## 🐛 问题反馈
+
+如果您遇到任何问题或有功能建议，请在 [GitHub Issues](https://github.com/ryne6/obsidian-live-photo/issues) 中提出。

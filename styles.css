@@ -1,8 +1,101 @@
-/*
+/* Live Photo 代码块样式 */
+.live-photo-container {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.live-photo-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
 
-If your plugin does not need CSS, delete this file.
+.live-photo-image,
+.live-photo-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  transition: opacity 0.3s ease;
+}
 
-*/
+.live-photo-image {
+  opacity: 1;
+}
+
+.live-photo-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.live-photo-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.live-photo-icon:hover {
+  transform: scale(1.1);
+}
+
+.live-photo-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #6A5ACD;
+  transition: color 0.3s ease;
+}
+
+.live-photo-icon:hover svg {
+  color: #5A4FCF;
+}
+
+.live-photo-error {
+  padding: 20px;
+  text-align: center;
+  color: #e74c3c;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 暗色主题适配 */
+.theme-dark .live-photo-container {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .live-photo-container:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.theme-dark .live-photo-icon svg {
+  color: #A78BFA;
+}
+
+.theme-dark .live-photo-icon:hover svg {
+  color: #C4B5FD;
+}
+
+.theme-dark .live-photo-error {
+  background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+  color: #ffffff;
+} 

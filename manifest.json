@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "obsidian-live-photo",
+	"name": "Live Photo Viewer",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
+	"description": "View and manage Live Photos (HEIC with video) in Obsidian with elegant interface and smooth interactions.",
+	"author": "ryne6",
+	"authorUrl": "https://github.com/ryne6",
 	"fundingUrl": "https://obsidian.md/pricing",
 	"isDesktopOnly": false
 }
