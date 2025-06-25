@@ -1,11 +1,10 @@
 {
-	"id": "obsidian-live-photo",
+	"id": "live-photo",
 	"name": "Live Photo Viewer",
-	"version": "1.0.0",
+	"version": "0.0.2",
 	"minAppVersion": "0.15.0",
-	"description": "View and manage Live Photos (HEIC with video) in Obsidian with elegant interface and smooth interactions.",
+	"description": "View and manage Live Photos (HEIC with video) with smooth interactions.",
 	"author": "ryne6",
 	"authorUrl": "https://github.com/ryne6",
-	"fundingUrl": "https://obsidian.md/pricing",
 	"isDesktopOnly": false
 }
