@@ -1,7 +1,7 @@
 {
 	"id": "live-photo",
 	"name": "Live Photo Viewer",
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"minAppVersion": "0.15.0",
 	"description": "View and manage Live Photos (HEIC with video) with smooth interactions.",
 	"author": "ryne6",
