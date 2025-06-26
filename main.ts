@@ -1,16 +1,12 @@
-import { Plugin } from 'obsidian';
+import { Plugin, setIcon } from 'obsidian';
 import { extractLivePhoto } from './lib/livePhoto';
 import { LivePhotoExtractResult, LivePhotoError, ERROR_CODES } from './lib/types';
 import { parseBlockParams, createErrorElement, isValidUrl } from './lib/utils';
 
 export default class LivePhotoPlugin extends Plugin {
-	private liveSvgContent = '';
 
 	async onload() {
 		console.log('Loading Live Photo Plugin');
-
-		// 加载 SVG 文件内容
-		await this.loadSvgContent();
 
 		// 注册代码块处理器
 		this.registerMarkdownCodeBlockProcessor('live', (source, el, ctx) => {
@@ -20,21 +16,6 @@ export default class LivePhotoPlugin extends Plugin {
 
 	onunload() {
 		console.log('Unloading Live Photo Plugin');
-	}
-
-	/**
-	 * 加载 SVG 图标内容
-	 */
-	private async loadSvgContent(): Promise<void> {
-		try {
-			const adapter = this.app.vault.adapter;
-			const svgPath = `${this.manifest.dir}/live.svg`;
-			this.liveSvgContent = await adapter.read(svgPath);
-		} catch (error) {
-			console.error('Failed to load live.svg:', error);
-			// 使用备用图标
-			this.liveSvgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/></svg>`;
-		}
 	}
 
 	/**
@@ -134,12 +115,12 @@ export default class LivePhotoPlugin extends Plugin {
 			}
 		});
 
-		// 创建控制图标
+		// 创建控制图标 - 使用安全的 setIcon 代替 innerHTML
 		const iconContainer = container.createEl('div', { cls: 'live-photo-icon' });
-		iconContainer.innerHTML = this.liveSvgContent;
+		setIcon(iconContainer, 'play-circle');
 
 		// 设置播放控制
-		this.setupPlaybackControls(img, video, iconContainer);
+		this.setupPlaybackControls(img, video, iconContainer, container);
 
 		// 设置错误处理
 		this.setupErrorHandling(img, video, container);
@@ -148,27 +129,24 @@ export default class LivePhotoPlugin extends Plugin {
 	/**
 	 * 设置播放控制
 	 */
-	private setupPlaybackControls(img: HTMLImageElement, video: HTMLVideoElement, iconContainer: HTMLElement): void {
+	private setupPlaybackControls(img: HTMLImageElement, video: HTMLVideoElement, iconContainer: HTMLElement, container: HTMLElement): void {
 		let isPlaying = false;
 
 		const togglePlayback = () => {
 			if (isPlaying) {
-				// 停止播放
+				// 停止播放 - 使用CSS类代替内联样式
 				video.pause();
 				video.currentTime = 0;
-				img.style.opacity = '1';
-				video.style.opacity = '0';
+				container.removeClass('live-photo-playing');
 				isPlaying = false;
 			} else {
-				// 开始播放
-				img.style.opacity = '0';
-				video.style.opacity = '1';
+				// 开始播放 - 使用CSS类代替内联样式
+				container.addClass('live-photo-playing');
 				video.currentTime = 0;
 				video.play().catch(error => {
 					console.error('Video playback failed:', error);
 					// 回退到图片
-					img.style.opacity = '1';
-					video.style.opacity = '0';
+					container.removeClass('live-photo-playing');
 					isPlaying = false;
 				});
 				isPlaying = true;
@@ -183,8 +161,7 @@ export default class LivePhotoPlugin extends Plugin {
 
 		// 视频结束后自动回到图片
 		video.addEventListener('ended', () => {
-			img.style.opacity = '1';
-			video.style.opacity = '0';
+			container.removeClass('live-photo-playing');
 			isPlaying = false;
 		});
 	}
@@ -194,11 +171,24 @@ export default class LivePhotoPlugin extends Plugin {
 	 */
 	private setupErrorHandling(img: HTMLImageElement, video: HTMLVideoElement, container: HTMLElement): void {
 		img.addEventListener('error', () => {
-			container.innerHTML = '<div class="live-photo-error">图片加载失败</div>';
+			// 使用安全的DOM API代替innerHTML
+			this.showError(container, '图片加载失败');
 		});
 
 		video.addEventListener('error', () => {
-			container.innerHTML = '<div class="live-photo-error">视频加载失败</div>';
+			// 使用安全的DOM API代替innerHTML
+			this.showError(container, '视频加载失败');
+		});
+	}
+
+	/**
+	 * 显示错误信息 - 安全的DOM操作
+	 */
+	private showError(container: HTMLElement, message: string): void {
+		container.empty();
+		container.createEl('div', {
+			text: message,
+			cls: 'live-photo-error'
 		});
 	}
 

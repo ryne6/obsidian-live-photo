@@ -27,6 +27,7 @@
 
 .live-photo-image {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .live-photo-video {
@@ -34,6 +35,16 @@
   top: 0;
   left: 0;
   opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 播放状态样式 */
+.live-photo-container.live-photo-playing .live-photo-image {
+  opacity: 0;
+}
+
+.live-photo-container.live-photo-playing .live-photo-video {
+  opacity: 1;
 }
 
 .live-photo-icon {
