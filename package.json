@@ -1,5 +1,5 @@
 {
-	"name": "obsidian-live-photo",
+	"name": "live-photo-plugin",
 	"version": "1.0.0",
 	"description": "An Obsidian plugin for viewing and managing Live Photos with elegant interface",
 	"main": "main.js",

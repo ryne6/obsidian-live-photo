@@ -1,4 +1,4 @@
-# Obsidian Live Photo Viewer
+# Live Photo Viewer
 
 一个优雅的 Obsidian 插件，用于查看和管理 Live Photos，支持自动提取 OPPO 手机 Live Photo 格式。
 
